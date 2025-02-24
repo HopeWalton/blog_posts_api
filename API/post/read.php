@@ -38,7 +38,7 @@
                 'category_name' => $category_name
             );
 
-            //Psuh to data
+            //Push to data
             array_push($posts_arr['data'], $post_item);
 
             //Turn to JSON
