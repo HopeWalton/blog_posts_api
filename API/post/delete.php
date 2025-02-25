@@ -3,7 +3,7 @@
     //Header
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Methods: DELETE');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 
@@ -20,18 +20,16 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $post->title = $data->title;
-    $post->body = $data->body;
-    $post->author = $data->author;
-    $post->category_id = $data->category_id;
+    // Set ID to delete
+    $post->id = $data->id;
 
-    //Create Post
-    if($post->create()){
+    //Update delete
+    if($post->delete()){
         echo json_encode(
-            array('message' => 'Post Created')
+            array('message' => 'Post Deleted')
         );
     } else {
         echo json_encode(
-            array('message' => 'Post Not Created')
+            array('message' => 'Post Not Deleted')
         );
     }

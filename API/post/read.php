@@ -1,7 +1,7 @@
 <?php
 
     //Header
-    header('Access-Control-Allow-Orgin: *');
+    header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
 
     include_once '../../config/Database.php';
@@ -41,9 +41,11 @@
             //Push to data
             array_push($posts_arr['data'], $post_item);
 
-            //Turn to JSON
-            echo json_encode($posts_arr);
         }
+
+    //Turn to JSON
+    echo json_encode($cat_arr);
+
     } else {
         //No posts
         echo json_encode(array('message' => 'No posts found'));
