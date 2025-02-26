@@ -66,4 +66,94 @@
             }
             
         }
+
+        // Create Category
+        public function create(){
+            // Create Query
+            $query = 'INSERT INTO ' . 
+                $this->table . '
+            SET
+                name = :name,
+                id = :id';
+
+            //Prepare Statement
+            $stmt = $this->conn->prepare($query);
+
+            //Clean Data
+            $this->name = htmlspecialchars(strip_tags($this->name));
+            $this->id = htmlspecialchars(strip_tags($this->id));
+            
+
+            //Bind data
+            $stmt->bindParam(':name', $this->name);
+            $stmt->bindParam(':id', $this->id);
+
+            //Execute query
+            if($stmt->execute()){
+                return true;
+            }
+
+            //Print error if something goes wrong
+            printf("Error: %s.\n", $stmt->error);
+            return false;
+        }
+
+        // Update Category
+        public function update(){
+            // Create Query
+            $query = 'UPDATE ' . 
+                $this->table . '
+            SET
+                name = :name,
+                id = :id
+            WHERE
+                id = :id';
+
+            //Prepare Statement
+            $stmt = $this->conn->prepare($query);
+
+            //Clean Data
+            $this->name = htmlspecialchars(strip_tags($this->name));
+            $this->id = htmlspecialchars(strip_tags($this->id));
+
+            //Bind data
+            $stmt->bindParam(':name', $this->name);
+            $stmt->bindParam(':id', $this->id);
+
+            //Execute query
+            if($stmt->execute()){
+                return true;
+            }
+
+            //Print error if something goes wrong
+            printf("Error: %s.\n", $stmt->error);
+            return false;
+        }
+
+        // Delete Category
+        public function delete(){
+            //Create query
+            $query = 'DELETE FROM ' . 
+                $this->table . ' 
+            WHERE
+                 id = :id';
+
+            //Prepare Statement
+            $stmt = $this->conn->prepare($query);
+
+            //Clean data
+            $this->id = htmlspecialchars(strip_tags($this->id));
+
+            // Bind
+            $stmt->bindParam(':id', $this->id);
+
+            //Execute query
+            if($stmt->execute()){
+                return true;
+            }
+
+            //Print error if something goes wrong
+            printf("Error: %s.\n", $stmt->error);
+            return false;
+        }
     }
